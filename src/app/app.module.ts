@@ -9,6 +9,7 @@ import { HttpModule } from '@angular/http';
 import { AboutComponent } from './about/about.component';
 import { HomeComponent } from './home/home.component';
 import { NgSemanticModule } from 'ng-semantic';
+import {LazyService} from "./service/lazy.service";
 
 @NgModule({
   declarations: [
@@ -23,6 +24,9 @@ import { NgSemanticModule } from 'ng-semantic';
     HttpModule,
     NgSemanticModule,
     RouterModule.forRoot(rootRouterConfig, { useHash: true })
+  ],
+  providers: [
+    LazyService
   ],
   bootstrap: [ AppComponent ]
 })

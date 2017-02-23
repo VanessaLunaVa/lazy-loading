@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import {LazyService} from "../service/lazy.service";
 
 @Component({
   selector: 'home',
@@ -13,6 +14,9 @@ export class HomeComponent {
   };
 
   public cedula: string = '';
+
+  constructor(private lazyService: LazyService) {}
+
 
   public onFileChangeEvent(fileInput: any) {
     this.filePath.textfile = fileInput.target.files;
@@ -36,27 +40,16 @@ export class HomeComponent {
     const reader = new FileReader();
     reader.addEventListener('load', () => {
       const contenido = reader.result;
-      console.log(reader.result);
-      // this.userService.setAvatar(image).subscribe(
-      //     data  => {
-      //       swal(
-      //           'Cambiar Avatar',
-      //           'Avatar modificado exitosamente!',
-      //           'success'
-      //       );
-      //       _.forEach(previews, function(preview) {
-      //         preview['src'] = reader.result;
-      //       });
-      //       localStorage.setItem('user.avatar', image);
-      //     },
-      //     error => {
-      //       console.log(error);
-      //       swal(
-      //           'Cambiar Avatar',
-      //           'Error modificando avatar',
-      //           'error'
-      //       );
-      //     });
+
+      this.lazyService.enviarArchivo(this.cedula, reader.result).subscribe(
+          data  => {
+              var blob = new Blob([data], { type: 'text/plain' });
+              var url= window.URL.createObjectURL(blob);
+              window.open(url);
+          },
+          error => {
+            console.log(error);
+          });
 
     }, false);
     if (file) {
