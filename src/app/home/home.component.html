@@ -1,0 +1,27 @@
+<div class="ui vertical masthead aligned segment">
+    <div class="ui container middle aligned stackable" style="padding-top:150px;">
+        <div class="ui text container">
+            <h1 class="ui header">
+                <i class="fa fa-search"></i>&nbsp;&nbsp;Procesar Archivo
+            </h1>
+
+
+            <div class="search item ui fluid " style="width:100%">
+                <div class="ui big icon input" style="width:100%" >
+                    <input type="text" #search placeholder="Cedula a Procesar" [(ngModel)]="cedula">
+                    <i class="payment icon"></i>
+                </div>
+            </div>
+
+            <div style="float: right;margin-top:10px">
+
+                <button class="ui grey huge button" style="float: right;"
+                        onclick="$('#file-input').trigger('click');" [class.disabled]="cedula==''"> Cargar Archivo</button>
+
+                <input type="file" (change)="onFileChangeEvent($event)" multiple style="visibility:hidden" id="file-input">
+
+            </div>
+
+        </div>
+    </div>
+</div>
